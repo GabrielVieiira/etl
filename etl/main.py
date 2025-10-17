@@ -1,0 +1,3 @@
+from fluxos.funcionarios_fluxo import etl_funcionarios_flow
+
+etl_funcionarios_flow()
