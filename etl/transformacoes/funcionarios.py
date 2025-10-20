@@ -26,13 +26,13 @@ COLUNAS_RENAME = {
     'cod_unidade':'cod_departamento',
     'cod_centro_custo':'cod_regional',
     'centro_custo_nro':'regional_nro',
-
 }
 
 def transform_funcionarios(raw_data: List[dict[str,Any]]) -> List[Funcionario]:
     df = pd.DataFrame(raw_data)
     df = df[[col for col in COLUNAS_RELEVANTES if col in df.columns]]
     df = df.rename(columns=COLUNAS_RENAME)
+    df = df.drop_duplicates(subset=['codigo'])
     df.fillna(value=pd.NA, inplace=True)
 
     try:

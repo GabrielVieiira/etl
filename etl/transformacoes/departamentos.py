@@ -13,6 +13,7 @@ COLUNAS_RELEVANTES = [
 def transform_departamentos(raw_data:List[dict[str,Any]]) -> List[Departamento]:
     df = pd.DataFrame(raw_data)
     df = df[[col for col in COLUNAS_RELEVANTES if col in df.columns]]
+    df = df.drop_duplicates(subset=['codigo'])
     df.fillna(value=pd.NA, inplace=True)
     try:
         departamentos = df.to_dict(orient='records')

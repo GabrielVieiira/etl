@@ -1,4 +1,3 @@
-from urllib import response
 import requests
 from typing import List, Dict
 from etl.utils.token import get_ifractal_token

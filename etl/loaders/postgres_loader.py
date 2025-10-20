@@ -15,19 +15,19 @@ def load_db(data: list[Any], table_name: str) -> None:
 
     engine = create_engine(DATABASE_URL)
     metadata = MetaData()
-    metadata.reflect(bind=engine)
+    metadata.reflect(bind=engine,schema='original')
     table: Table = metadata.tables[table_name]
     dialect = engine.dialect.name
     with engine.begin() as connection:
         for funcionario in data:
             dados = funcionario.dict()
             if dialect == "postgresql":
-                statement = insert(table).values(**dados)
-                statement = statement.on_conflict_do_update(
-                    index_elements=["codigo"],
-                    set_={k: statement.excluded[k] for k in dados if k != "codigo"}
-                )
-                connection.execute(statement)
+                statement = insert(table)
+                # statement = statement.on_conflict_do_update(
+                #     index_elements=["codigo"],
+                #     set_={k: statement.excluded[k] for k in dados if k != "codigo"}
+                # )
+                connection.execute(statement,dados)
 
             elif dialect == "sqlite":
                 colunas = ", ".join(dados.keys())

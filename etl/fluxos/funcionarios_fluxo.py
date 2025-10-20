@@ -14,7 +14,7 @@ def transform_task(raw: list[dict]) -> list[Funcionario]:
 
 @task(name="📤 Inserir no banco de dados")
 def load_task(data: list[Funcionario]):
-    load_db(data,'funcionarios')
+    load_db(data,'original.funcionarios')
 
 @flow(name="ETL Funcionários RH (pandas + requests)")
 def etl_funcionarios_flow():

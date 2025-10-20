@@ -4,4 +4,4 @@ from typing import Optional
 class Empresa(BaseModel):
     codigo:         int
     nome:           str
-    qtd_pessoas:    Optional[int]
+    qtd_pessoa:    Optional[int]
