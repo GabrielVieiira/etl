@@ -5,3 +5,4 @@ from etl.schemas.funcionarios import Funcionario
 from etl.schemas.justificativas_abono import JustificativaAbono
 from etl.schemas.pontos import Ponto
 from etl.schemas.regionais import Regional
+from etl.schemas.ajuste_manual import AjusteManual

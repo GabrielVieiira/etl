@@ -13,7 +13,7 @@ headers = {
 body = {
     'pag': 'ponto_dia',
     'cmd': 'get',
-    'data':'21/12/2024',
+    'data':'21/09/2025',
 }
 
 def fetch_pontos_data() -> List[Dict[str, str]]:
@@ -25,12 +25,11 @@ def fetch_pontos_data() -> List[Dict[str, str]]:
         body['data'] = data_do_loop.strftime("%d/%m/%Y")
         print("Buscando:", body['data'])
 
-        resp = requests.post(API_URL, json=body, headers=headers)
+        resp = requests.post(API_URL, json=body, headers=headers,timeout=(15, 300))
         itens = resp.json().get('itens', [])
         if not itens:
             data_do_loop += timedelta(days=1)
             continue
-
         dados.extend(itens)
         data_do_loop += timedelta(days=1)
-        return dados
+    return dados

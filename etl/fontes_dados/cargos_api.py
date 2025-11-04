@@ -1,5 +1,6 @@
 import requests
 from typing import List, Dict
+
 from etl.utils.token import get_ifractal_token
 from etl.utils.config import API_URL, API_USER
 

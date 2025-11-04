@@ -1,38 +1,31 @@
 from typing import Any
-from sqlalchemy import create_engine, MetaData, Table, text, insert
 from etl.utils.config import DATABASE_URL
-from etl.schemas.funcionarios import Funcionario
+from sqlalchemy import create_engine, MetaData, Table, insert
+from sqlalchemy.dialects.postgresql import insert as pg_insert
 
 def load_db(data: list[Any], table_name: str) -> None:
-    """
-    Insere ou atualiza dados na tabela 'funcionarios', adaptando-se automaticamente
-    ao banco de dados (PostgreSQL ou SQLite).
-
-    Parâmetros:
-    - funcionarios: Lista de objetos validados com Pydantic
-    - table_name: Nome da tabela de destino (padrão: 'funcionarios')
-    """
-
     engine = create_engine(DATABASE_URL)
     metadata = MetaData()
-    metadata.reflect(bind=engine,schema='original')
+    metadata.reflect(bind=engine, schema='original')
     table: Table = metadata.tables[table_name]
     dialect = engine.dialect.name
-    with engine.begin() as connection:
-        for funcionario in data:
-            dados = funcionario.dict()
-            if dialect == "postgresql":
-                statement = insert(table)
-                # statement = statement.on_conflict_do_update(
-                #     index_elements=["codigo"],
-                #     set_={k: statement.excluded[k] for k in dados if k != "codigo"}
-                # )
-                connection.execute(statement,dados)
 
-            elif dialect == "sqlite":
-                colunas = ", ".join(dados.keys())
-                valores = ", ".join([f":{chave}" for chave in dados])
-                query = f"INSERT OR REPLACE INTO {table_name} ({colunas}) VALUES ({valores})"
-                connection.execute(text(query), dados)
-            else:
-                raise NotImplementedError(f"Banco '{dialect}' ainda não é suportado.")
+    # Converte lista de modelos Pydantic em lista de dicts
+    registros = [obj.dict() for obj in data]
+
+    with engine.begin() as connection:
+        if not registros:
+            return
+
+        if dialect == "postgresql":
+            # Inserção com upsert (INSERT ... ON CONFLICT DO UPDATE)
+            stmt = pg_insert(table).values(registros)
+            stmt = stmt.on_conflict_do_update(
+                index_elements=["codigo"],
+                set_={k: stmt.excluded[k] for k in registros[0] if k != "codigo"}
+            )
+            connection.execute(stmt)
+        else:
+            # Inserção simples em lote para SQLite ou outros
+            stmt = insert(table)
+            connection.execute(stmt, registros)
