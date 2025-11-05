@@ -13,7 +13,7 @@ headers = {
 body = {
     'pag': 'ponto_dia',
     'cmd': 'get',
-    'data':'21/09/2025',
+    'data':'21/10/2025',
 }
 
 def fetch_pontos_data() -> List[Dict[str, str]]:

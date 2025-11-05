@@ -19,7 +19,7 @@ class Ponto(BaseModel):
     justificativa: Optional[str]
     cod_justificativa_ponto: Optional[int]
     qtd_abono_total: Optional[bool]
-    qtd_abono_parcial: Optional[bool]
+    qtd_abono_parcial: Optional[int]
     min_diver_abonada: Optional[int]
     min_normais: Optional[int]
     min_faltantes: Optional[int]

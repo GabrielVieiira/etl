@@ -14,13 +14,13 @@ def transform_ajuste_manual_task(raw: list[dict]) -> list[AjusteManual]:
 
 @task(name="📤 Inserir ajustes manuais no banco de dados")
 def load_ajuste_manual_task(data: list[AjusteManual]):
-    load_db(data,'original.ajuste_manual')
+    load_db(data,'original.ajustes_manuais')
 
 @flow(name="ETL ajustes manuais RH")
 def etl_ajuste_manual_flow():
     raw_data = fetch_ajuste_manual_task()
     clean_data = transform_ajuste_manual_task(raw_data)
-    # load_ajuste_manual_task(clean_data)
+    load_ajuste_manual_task(clean_data)
 
 if __name__ == "__main__":
     etl_ajuste_manual_flow()

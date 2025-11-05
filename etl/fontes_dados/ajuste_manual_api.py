@@ -21,7 +21,6 @@ def fetch_ajuste_manual_data() -> List[Dict[Any, Any]]:
         sheet = client.open_by_key(SHEET_ID).worksheet(SHEET_NAME)
 
         data = sheet.get_all_records()
-
         return data
 
     except gspread.exceptions.SpreadsheetNotFound:
