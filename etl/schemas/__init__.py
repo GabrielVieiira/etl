@@ -5,4 +5,8 @@ from etl.schemas.funcionarios import Funcionario
 from etl.schemas.justificativas_abono import JustificativaAbono
 from etl.schemas.pontos import Ponto
 from etl.schemas.regionais import Regional
-from etl.schemas.ajuste_manual import AjusteManual
+from etl.schemas.ajustes_manuais import AjusteManual
+from etl.schemas.controle_refeicoes import ControleRefeicao
+from etl.schemas.obs_refeicao import ObsRefeicao
+from etl.schemas.entregaveis import Entregaveis
+from etl.schemas.check_list import CheckList

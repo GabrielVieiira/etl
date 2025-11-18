@@ -68,7 +68,6 @@ colunas_que_vao_do_jeito_que_ta = [
     'hrentrada','hrini_intervalo','hrfim_intervalo','hrsaida','ultima_marcacao','pos_ultima_marcacao',
 ]
 
-
 ''' Função para transformar colunas de horas em minutos'''
 def _to_minutes(valor: str | int | float | None) -> int | None:
     if pd.isna(valor):

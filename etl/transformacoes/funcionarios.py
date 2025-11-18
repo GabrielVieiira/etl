@@ -34,7 +34,6 @@ def transform_funcionarios(raw_data: List[dict[str,Any]]) -> List[Funcionario]:
     df = df.rename(columns=COLUNAS_RENAME)
     df = df.drop_duplicates(subset=['codigo'])
     df.fillna(value=pd.NA, inplace=True)
-
     try:
         funcionarios = df.to_dict(orient='records')
         return [Funcionario(**row) for row in funcionarios] #type: ignore

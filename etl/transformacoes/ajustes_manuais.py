@@ -7,11 +7,10 @@ COLUNAS_DATA = [
     'data_evento'
 ]
 
-def transform_ajuste_manual(raw_data:List[dict[str,Any]]) -> List[AjusteManual]:
+def transform_ajustes_manuais(raw_data:List[dict[str,Any]]) -> List[AjusteManual]:
     df = pd.DataFrame(raw_data)
     for col in COLUNAS_DATA:
         df[col] = pd.to_datetime(df[col], format="%d/%m/%Y", errors="coerce").dt.strftime("%Y-%m-%d")
-    df.fillna(value='', inplace=True)
     try:
         ajustes_manuais = df.to_dict(orient='records')
         return [AjusteManual(**row) for row in ajustes_manuais] #type: ignore

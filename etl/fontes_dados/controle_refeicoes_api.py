@@ -1,4 +1,3 @@
-import pandas as pd
 import gspread
 from google.oauth2.service_account import Credentials
 from typing import Any, List, Dict
@@ -6,11 +5,11 @@ from typing import Any, List, Dict
 from etl.utils.config import GOOGLE_CREDENTIALS_PATH
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
-SHEET_ID = '1qjT4k6P88F_4tzZ_8MB0YJCfUglqst9Mu6P-LGimAoY'  
-SHEET_NAME = 'Página1'
+SHEET_ID = '1HUnVGxkhkwRcynG4ED3JyCIFYGTr01dchZDEz94mCYc'  
+SHEET_NAME = 'CONTROLE_REFEICOES'
 
 
-def fetch_ajuste_manual_data() -> List[Dict[Any, Any]]:
+def fetch_controle_refeicoes_data() -> List[Dict[Any, Any]]:
     try:
         creds = Credentials.from_service_account_file(
             GOOGLE_CREDENTIALS_PATH,
@@ -21,6 +20,7 @@ def fetch_ajuste_manual_data() -> List[Dict[Any, Any]]:
         sheet = client.open_by_key(SHEET_ID).worksheet(SHEET_NAME)
 
         data = sheet.get_all_records()
+
         return data
 
     except gspread.exceptions.SpreadsheetNotFound:
