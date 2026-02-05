@@ -16,7 +16,7 @@ def transform_obs_refeicao_task(raw: list[dict]) -> list[ObsRefeicao]:
 def load_obs_refeicao_task(data: list[ObsRefeicao]) -> None:
     load_db(data,'original.obs_refeicao')
 
-@flow(name="ETL observações de refeição RH", log_prints=True)
+@flow(name="ETL observações de refeição RH")
 def etl_obs_refeicao_flow():
     raw_data = fetch_obs_refeicao_task()
     clean_data = transform_obs_refeicao_task(raw_data)

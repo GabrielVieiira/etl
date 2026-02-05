@@ -10,8 +10,8 @@ def get_env_var(name: str) -> str:
         raise ValueError(f'Variável de ambiente {name} não definida')
     return value
 
-API_URL: str = get_env_var('API_URL')
-API_USER: str = get_env_var('API_USER')
-API_TOKEN_BASE: str = get_env_var('API_TOKEN_BASE')
+IFRACTAL_API_URL: str = get_env_var('IFRACTAL_API_URL')
+IFRACTAL_API_USER: str = get_env_var('IFRACTAL_API_USER')
+IFRACTAL_API_TOKEN: str = get_env_var('IFRACTAL_API_TOKEN')
 DATABASE_URL: str = get_env_var('DATABASE_URL')
 GOOGLE_CREDENTIALS_PATH: str = get_env_var('GOOGLE_CREDENTIALS_PATH')

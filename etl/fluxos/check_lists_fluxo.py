@@ -16,7 +16,7 @@ def transform_check_lists_task(raw: list[dict]) -> list[CheckList]:
 def load_check_lists_task(data: list[CheckList]) -> None:
     load_db(data,'original.checklists')
 
-@flow(name="ETL check lists RH", log_prints=True)
+@flow(name="ETL check lists RH")
 def etl_check_lists_flow():
     raw_data = fetch_check_lists_task()
     clean_data = transform_check_lists_task(raw_data)

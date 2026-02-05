@@ -1,11 +1,11 @@
 import requests
 from typing import List, Dict
 from etl.utils.token import get_ifractal_token
-from etl.utils.config import API_URL, API_USER
+from etl.utils.config import IFRACTAL_API_URL, IFRACTAL_API_USER
 
 HEADER = {
     'Content-Type': 'application/json',
-    'User': API_USER,
+    'User': IFRACTAL_API_USER,
     'Token': get_ifractal_token()
 }
 
@@ -22,10 +22,10 @@ BODY_INATIVOS = {
 
 def fetch_funcionarios_data() -> List[Dict[str,str]]:
     try:
-        response_ativos = requests.post(API_URL, json=BODY_ATIVOS, headers=HEADER, timeout=30)
+        response_ativos = requests.post(IFRACTAL_API_URL, json=BODY_ATIVOS, headers=HEADER, timeout=30)
         response_ativos.raise_for_status()
 
-        response_inativos = requests.post(API_URL, json=BODY_INATIVOS, headers=HEADER, timeout=30)
+        response_inativos = requests.post(IFRACTAL_API_URL, json=BODY_INATIVOS, headers=HEADER, timeout=30)
         response_inativos.raise_for_status()
 
         data_ativos = response_ativos.json().get('itens', [])

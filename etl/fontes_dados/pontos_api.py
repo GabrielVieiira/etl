@@ -2,11 +2,11 @@ import requests
 from datetime import datetime, timedelta
 from typing import List, Dict
 from etl.utils.token import get_ifractal_token
-from etl.utils.config import API_URL, API_USER
+from etl.utils.config import IFRACTAL_API_URL, IFRACTAL_API_USER
 
 headers = {
     'Content-Type': 'application/json',
-    'User': API_USER,
+    'User': IFRACTAL_API_USER,
     'Token': get_ifractal_token(),
 }
 
@@ -25,7 +25,7 @@ def fetch_pontos_data() -> List[Dict[str, str]]:
         body['data'] = data_do_loop.strftime("%d/%m/%Y")
         print("Buscando:", body['data'])
 
-        resp = requests.post(API_URL, json=body, headers=headers,timeout=(15, 300))
+        resp = requests.post(IFRACTAL_API_URL, json=body, headers=headers,timeout=(15, 300))
         itens = resp.json().get('itens', [])
         if not itens:
             data_do_loop += timedelta(days=1)

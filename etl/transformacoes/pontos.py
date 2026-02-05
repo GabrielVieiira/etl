@@ -97,6 +97,7 @@ def transformar_em_minutos(df:pd.DataFrame, colunas:list[str]) -> pd.DataFrame:
     for coluna in colunas:
         df[coluna] = df[coluna].apply(_to_minutes) #type: ignore
     return df
+
 '''Função que renomeia e ordena as colunas do DataFrame criado atraves da requisiçãoconforme a estrutura do banco SQLite.'''
 def padronizar_colunas_ponto(df_pontos: pd.DataFrame) -> pd.DataFrame:
     """Renomeia e ordena as colunas do DataFrame conforme a estrutura do banco SQLite."""

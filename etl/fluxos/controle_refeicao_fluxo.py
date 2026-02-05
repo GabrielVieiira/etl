@@ -16,7 +16,7 @@ def transform_controle_refeicoes_task(raw: list[dict]) -> list[ControleRefeicao]
 def load_controle_refeicoes_task(data: list[ControleRefeicao]) -> None:
     load_db(data,'original.controle_refeicoes')
 
-@flow(name="ETL controle de refeições RH", log_prints=True)
+@flow(name="ETL controle de refeições RH")
 def etl_controle_refeicoes_flow():
     raw_data = fetch_controle_refeicoes_task()
     clean_data = transform_controle_refeicoes_task(raw_data)

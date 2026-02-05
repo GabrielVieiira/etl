@@ -10,7 +10,7 @@ COLUNAS_RELEVANTES = [
     'Data',
     'Patrimonio',
     'km ou horimetro',
-    'MOTORISTA',
+    'Motorista',
     'Checklist ok?',
     'Tipo Patrimonio',
     'Regional',
@@ -20,7 +20,7 @@ COLUNAS_RENAME = {
     'Data':'data',
     'Patrimonio':'patrimonio',
     'km ou horimetro':'km_ou_horimetro',
-    'MOTORISTA':'motorista',
+    'Motorista':'motorista',
     'Checklist ok?':'checklist_ok',
     'Tipo Patrimonio':'tipo_patrimonio',
     'Regional':'regional',
@@ -40,7 +40,6 @@ def transform_check_lists(raw_data:List[dict[str,Any]]) -> List[CheckList]:
             .str.replace(',', '.', regex=False)
             .astype(float)
     )
-    df.to_excel('checklists_transformados.xlsx', index=False)
     try:
         check_lists = df.to_dict(orient='records')
         return [CheckList(**row) for row in check_lists] #type: ignore

@@ -16,7 +16,7 @@ def transform_entregaveis_task(raw: list[dict]) -> list[Entregaveis]:
 def load_entregaveis_task(data: list[Entregaveis]) -> None:
     load_db(data,'original.entregaveis')
 
-@flow(name="ETL entregaveis RH", log_prints=True)
+@flow(name="ETL entregaveis RH")
 def etl_entregaveis_flow():
     raw_data = fetch_entregaveis_task()
     clean_data = transform_entregaveis_task(raw_data)

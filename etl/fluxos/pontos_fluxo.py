@@ -16,7 +16,7 @@ def transform_pontos_task(raw: list[dict]) -> list[Ponto]:
 def load_pontos_task(data: list[Ponto]):
     load_db(data,'original.pontos')
 
-@flow(name="ETL pontos RH (pandas + requests)", log_prints=True)
+@flow(name="ETL pontos RH (pandas + requests)")
 def etl_pontos_flow():
     raw_data = fetch_pontos_task()
     clean_data = transform_pontos_task(raw_data)
